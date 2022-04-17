@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Test"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/healthcheck": {
+      "get": {
+        "operationId": "Test_Heathcheck",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Ttt2HealthcheckResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "msg",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Test"
+        ]
+      }
+    },
+    "/api/helloworld": {
+      "post": {
+        "operationId": "Test_Helloworld",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Ttt2HelloReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ttt2HelloRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Test"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Ttt2HealthcheckResponse": {
+      "type": "object",
+      "example": {
+        "result": "ok"
+      },
+      "properties": {
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "Ttt2HelloReply": {
+      "type": "object",
+      "example": {
+        "msg": "hello world from server",
+        "code": "0"
+      },
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "Ttt2HelloRequest": {
+      "type": "object",
+      "example": {
+        "msg": "hello world"
+      },
+      "properties": {
+        "msg": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
